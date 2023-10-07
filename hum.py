@@ -66,8 +66,9 @@ def get_term_classes(term,year):
                 continue
             course_name = unicodedata.normalize("NFKD", course_name)
             course_num = int(re.findall(r'\d+',course_name)[0])
-            # Frosh hums are numbered less than 60 and are crosslisted with humanities
-            if course_num <= 60 and 'HUMANITIES' in dept:
+            # Frosh hums are numbered less than x where x depends on the year and are crosslisted with humanities
+            frosh_max = {23:60, 22:60, 21:60, 20:60, 19:50, 18:50, 17:50, 16:50, 15:20, 14:20, 13:20, 12:20, 11:20, 10:20, 9:20, 8:20, 7:10}
+            if course_num <= frosh_max[year] and 'HUMANITIES' in dept:
                 req = 'frosh hum'
             # Advanced hums are 90 (98 and 99 are thesis classes)
             elif course_num >= 90 and course_num != 98 and course_num != 99:
